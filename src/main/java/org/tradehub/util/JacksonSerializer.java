@@ -1,4 +1,4 @@
-package org.tradehub.domain;
+package org.tradehub.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
