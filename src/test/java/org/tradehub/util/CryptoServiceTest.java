@@ -18,7 +18,8 @@ class CryptoServiceTest {
     private final CryptoService classUnderTest = new CryptoService();
     private final String mnemonic = "shell scatter method illegal area bid law genius found maze hope negative kit soldier promote various power true reward success own decrease retire raven";
     private final String mnemonicPriv = "c5780e30b880b42c1f7b075c3131b5c9f7af9d2b0f8ca95d2ae2ec29e0726dfd";
-    private final String address = "swth1z0mj8pj7ye57e33jzf6wajy43cz6kq0pyl2sdn";
+    private final String general_address = "swth1fshaavu32cmxuae34tsuskfqxr7ch5sr43crvj";
+    private final String mainnet_address = "swth1z0mj8pj7ye57e33jzf6wajy43cz6kq0pyl2sdn";
     private final String password = "mypassword";
 
     @Test
@@ -100,34 +101,32 @@ class CryptoServiceTest {
         final String bech32Address = Bech32.encode(hrp, bech32Result);
 
         // assert
-        // assertEquals(address, bech32Address);
-
+        assertEquals(general_address, bech32Address);
     }
 
     @Test
     void bech32FromPublicKey_when_staticInput_then_staticOutput() {
         // arrange
         final String publicKeyRawCompressed = "0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798";
-        final String version = "00";
         final String hrp = "swth";
         final String expectedRipeMDHex = "751e76e8199196d454941c45d1b3a323f1433bd6";
         final String expectedBinaryString = "01110101000111100111011011101000000110011001000110010110110101000101010010" +
                 "01010000011100010001011101000110110011101000110010001111110001010000110011101111010110";
-        final String expectedResultWithVersion = "000e140f070d1a001912060b0d081504140311021d030c1d03040f1814060e1e16";
-        final String expectedAddress = "swth1qw508d6qejxtdg4y5r3zarvary0c5xw7k92cmur";
+        final String expectedResultHex = "0e140f070d1a001912060b0d081504140311021d030c1d03040f1814060e1e16";
+        final String expectedAddress = "swth1w508d6qejxtdg4y5r3zarvary0c5xw7k9ravup";
 
         // act
         final byte[] ripeMDHashBytes = CryptoService.getRIPEMD160(Hex.decode(publicKeyRawCompressed));
         final String ripeMDHex = Hex.toHexString(ripeMDHashBytes);
         final String binaryString = CryptoService.toByteString(ripeMDHashBytes);
         final byte[] bech32Result = CryptoService.getBech32Bytes(binaryString, new byte[32], 0);
-        final String resultWithVersion = version + Hex.toHexString(bech32Result);
-        final String bech32Address = Bech32.encode(hrp, Hex.decode(resultWithVersion));
+        final String resultHex = Hex.toHexString(bech32Result);
+        final String bech32Address = Bech32.encode(hrp, Hex.decode(resultHex));
 
         // assert
         assertEquals(expectedRipeMDHex, ripeMDHex);
         assertEquals(expectedBinaryString, binaryString);
-        assertEquals(expectedResultWithVersion, resultWithVersion);
+        assertEquals(expectedResultHex, resultHex);
         assertEquals(expectedAddress, bech32Address);
     }
 }
