@@ -1,4 +1,4 @@
-package org.tradehub.util;
+package org.tradehub.adapter.crypto;
 
 import org.bouncycastle.crypto.digests.SHA512Digest;
 import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator;
@@ -246,8 +246,7 @@ public class MnemonicService {
     private static byte calculateChecksum(byte[] initialEntropy) {
         int ent = initialEntropy.length * 8;
         byte mask = (byte) (0xff << 8 - ent / 32);
-        byte[] bytes = CryptoService.sha256.digest(initialEntropy);
-
+        byte[] bytes = TradehubCryptoProvider.sha256.digest(initialEntropy);
         return (byte) (bytes[0] & mask);
     }
 

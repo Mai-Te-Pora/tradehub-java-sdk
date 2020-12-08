@@ -4,7 +4,7 @@ import com.adelean.inject.resources.junit.jupiter.GivenTextResource;
 import com.adelean.inject.resources.junit.jupiter.TestWithResources;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
-import org.tradehub.util.JacksonSerializer;
+import org.tradehub.domain.util.JacksonSerializer;
 
 import java.math.BigDecimal;
 

@@ -5,8 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.tradehub</groupId>
-    <artifactId>tradehub-api-java</artifactId>
+    <artifactId>tradehub-java-sdk</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>domain-tradehub</module>
+        <module>adapter-crypto-tradehub</module>
+        <module>application-tradehub</module>
+    </modules>
 
     <repositories>
         <repository>
@@ -24,8 +30,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <jackson.version>2.12.0</jackson.version>
         <junit.version>5.7.0</junit.version>
-        <bitcoinj.version>0.15.9</bitcoinj.version>
-        <bouncycastle.version>1.63</bouncycastle.version>
+        <log4j.version>2.14.0</log4j.version>
     </properties>
 
     <dependencies>
@@ -45,19 +50,14 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.bitcoinj</groupId>
-            <artifactId>bitcoinj-core</artifactId>
-            <version>${bitcoinj.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>${bouncycastle.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
-            <version>${bouncycastle.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
