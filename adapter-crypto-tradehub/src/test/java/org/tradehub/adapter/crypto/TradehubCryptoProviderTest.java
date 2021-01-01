@@ -20,7 +20,6 @@ class TradehubCryptoProviderTest {
     private final String mnemonic = "shell scatter method illegal area bid law genius found maze hope negative kit soldier promote various power true reward success own decrease retire raven";
     private final String mnemonicPriv = "c5780e30b880b42c1f7b075c3131b5c9f7af9d2b0f8ca95d2ae2ec29e0726dfd";
     private final String general_address = "swth1fshaavu32cmxuae34tsuskfqxr7ch5sr43crvj";
-    private final String mainnet_address = "swth1z0mj8pj7ye57e33jzf6wajy43cz6kq0pyl2sdn";
     private final String password = "mypassword";
 
     @Test
