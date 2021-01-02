@@ -15,17 +15,17 @@ public class TokenBuilder {
     @JsonProperty("denom")
     String denom;
     @JsonProperty("decimals")
-    Integer decimals;
+    int decimals;
     @JsonProperty("blockchain")
     String blockchain;
     @JsonProperty("chain_id")
-    Integer chainId;
+    int chainId;
     @JsonProperty("asset_id")
     String assetId;
     @JsonProperty("is_active")
-    Boolean isActive;
+    boolean isActive;
     @JsonProperty("is_collateral")
-    Boolean isCollateral;
+    boolean isCollateral;
     @JsonProperty("lockproxy_hash")
     String lockproxyHash;
     @JsonProperty("delegated_supply")
@@ -48,7 +48,7 @@ public class TokenBuilder {
         return this;
     }
 
-    public TokenBuilder withDecimals(Integer decimals) {
+    public TokenBuilder withDecimals(int decimals) {
         this.decimals = decimals;
         return this;
     }
@@ -58,7 +58,7 @@ public class TokenBuilder {
         return this;
     }
 
-    public TokenBuilder withChainId(Integer chainId) {
+    public TokenBuilder withChainId(int chainId) {
         this.chainId = chainId;
         return this;
     }
@@ -68,12 +68,12 @@ public class TokenBuilder {
         return this;
     }
 
-    public TokenBuilder withIsActive(Boolean isActive) {
+    public TokenBuilder withIsActive(boolean isActive) {
         this.isActive = isActive;
         return this;
     }
 
-    public TokenBuilder withIsColleteral(Boolean isCollateral) {
+    public TokenBuilder withIsColleteral(boolean isCollateral) {
         this.isCollateral = isCollateral;
         return this;
     }

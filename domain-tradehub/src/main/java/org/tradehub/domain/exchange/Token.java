@@ -7,18 +7,18 @@ import java.math.BigDecimal;
 @JsonDeserialize(builder = TokenBuilder.class)
 public class Token {
 
-    private final String name;
-    private final String symbol;
-    private final String denom;
-    private final Integer decimals;
-    private final String blockchain;
-    private final Integer chainId;
-    private final String assetId;
-    private final Boolean isActive;
-    private final Boolean isCollateral;
-    private final String lockproxyHash;
-    private final BigDecimal delegatedSupply;
-    private final String originator;
+    protected String name;
+    protected String symbol;
+    protected String denom;
+    protected int decimals;
+    protected String blockchain;
+    protected int chainId;
+    protected final String assetId;
+    protected final boolean isActive;
+    protected final boolean isCollateral;
+    protected final String lockproxyHash;
+    protected final BigDecimal delegatedSupply;
+    protected final String originator;
 
     public Token(final TokenBuilder builder) {
         name = builder.name;
@@ -47,7 +47,7 @@ public class Token {
         return denom;
     }
 
-    public Integer getDecimals() {
+    public int getDecimals() {
         return decimals;
     }
 
@@ -55,7 +55,7 @@ public class Token {
         return blockchain;
     }
 
-    public Integer getChainId() {
+    public int getChainId() {
         return chainId;
     }
 
@@ -63,11 +63,11 @@ public class Token {
         return assetId;
     }
 
-    public Boolean getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public Boolean getIsCollateral() {
+    public boolean getIsCollateral() {
         return isCollateral;
     }
 
@@ -82,5 +82,4 @@ public class Token {
     public String getOriginator() {
         return originator;
     }
-
 }

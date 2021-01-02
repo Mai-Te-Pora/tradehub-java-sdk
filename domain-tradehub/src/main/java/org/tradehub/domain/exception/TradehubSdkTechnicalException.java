@@ -1,4 +1,4 @@
-package org.tradehub.application.exception;
+package org.tradehub.domain.exception;
 
 public class TradehubSdkTechnicalException extends RuntimeException {
 }

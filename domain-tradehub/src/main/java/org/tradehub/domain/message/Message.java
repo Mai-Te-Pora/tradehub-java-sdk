@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(builder = MessageBuilder.class)
 public class Message {
 
-    private String type;
-    private Payload value;
+    protected String type;
+    protected Payload value;
 
     public Message(final MessageBuilder builder) {
         this.type = builder.type;
@@ -19,12 +19,5 @@ public class Message {
 
     public Payload getValue() {
         return value;
-    }
-
-    protected void setType(String type) {
-        this.type = type;
-    }
-    protected void setValue(Payload value) {
-        this.value = value;
     }
 }

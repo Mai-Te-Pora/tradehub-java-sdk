@@ -21,7 +21,7 @@ import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.util.encoders.Hex;
-import org.tradehub.application.gateway.TradehubCrypto;
+import org.tradehub.domain.gateway.TradehubCrypto;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package org.tradehub.application.gateway;
+package org.tradehub.domain.gateway;
 
 import java.security.KeyPair;
 import java.security.KeyStore;

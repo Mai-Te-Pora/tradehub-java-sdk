@@ -11,7 +11,6 @@
     <modules>
         <module>domain-tradehub</module>
         <module>adapter-crypto-tradehub</module>
-        <module>application-tradehub</module>
     </modules>
 
     <repositories>
