@@ -11,17 +11,17 @@ import static java.util.Objects.requireNonNull;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreateOrder implements Payload {
 
-    private final String market;
-    private final String side;
-    private final String quantity;
-    private final String type;
-    private final String price;
-    private final String stopPrice;
-    private final String timeInForce;
-    private final String triggerType;
-    private final boolean isReduceOnly;
-    private final boolean isPostOnly;
-    private final String originator;
+    private String market;
+    private String side;
+    private String quantity;
+    private String type;
+    private String price;
+    private String stopPrice;
+    private String timeInForce;
+    private String triggerType;
+    private boolean isReduceOnly;
+    private boolean isPostOnly;
+    private String originator;
 
     public CreateOrder(final CreateOrderBuilder builder){
         this.market = requireNonNull(builder.market, "Market field must be non null");
@@ -90,5 +90,49 @@ public class CreateOrder implements Payload {
 
     public String getOriginator() {
         return originator;
+    }
+
+    protected void setMarket(String market) {
+        this.market = market;
+    }
+
+    protected void setSide(String side) {
+        this.side = side;
+    }
+
+    protected void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    protected void setType(String type) {
+        this.type = type;
+    }
+
+    protected void setPrice(String price) {
+        this.price = price;
+    }
+
+    protected void setStopPrice(String stopPrice) {
+        this.stopPrice = stopPrice;
+    }
+
+    protected void setTimeInForce(String timeInForce) {
+        this.timeInForce = timeInForce;
+    }
+
+    protected void setTriggerType(String triggerType) {
+        this.triggerType = triggerType;
+    }
+
+    protected void setReduceOnly(boolean reduceOnly) {
+        isReduceOnly = reduceOnly;
+    }
+
+    protected void setPostOnly(boolean postOnly) {
+        isPostOnly = postOnly;
+    }
+
+    protected void setOriginator(String originator) {
+        this.originator = originator;
     }
 }
