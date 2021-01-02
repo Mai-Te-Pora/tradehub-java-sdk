@@ -1,92 +1,126 @@
 package org.tradehub.domain.message.payload;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import org.tradehub.domain.exception.TradehubSdkTechnicalException;
+import org.tradehub.domain.message.MessageType;
+import org.tradehub.domain.message.TradehubMessage;
+import org.tradehub.domain.message.TradehubMessageBuilder;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
-@JsonPOJOBuilder
-public class CreateOrderBuilder {
+import static java.util.Objects.requireNonNull;
 
-    @JsonProperty("market")
-    String market;
-    @JsonProperty("side")
-    String side;
-    @JsonProperty("quantity")
-    String quantity;
-    @JsonProperty("originator")
-    String originator;
-    @JsonProperty("type")
-    String type = OrderType.LIMIT.value;
-    @JsonProperty("price")
-    String price;
-    @JsonProperty("stop_price")
-    String stopPrice;
-    @JsonProperty("time_in_force")
-    String timeInForce = OrderTimeInForce.GTC.value;
-    @JsonProperty("trigger_type")
-    String triggerType;
-    @JsonProperty("is_reduce_only")
-    boolean isReduceOnly = false;
-    @JsonProperty("is_post_only")
-    boolean isPostOnly = false;
+public class CreateOrderBuilder implements TradehubMessageBuilder {
 
+    private final Map<String, String> value = new HashMap<>();
+    public static final String TYPE = MessageType.CREATE_ORDER_MSG_TYPE.value;
+    public static final String KEY_MARKET = "Market";
+    public static final String KEY_SIDE = "Side";
+    public static final String KEY_QUANTITY = "Quantity";
+    public static final String KEY_ORDER_TYPE = "OrderType";
+    public static final String KEY_PRICE = "Price";
+    public static final String KEY_STOP_PRICE = "StopPrice";
+    public static final String KEY_ORDER_TIME_IN_FORCE = "OrderTimeInForce";
+    public static final String KEY_TRIGGER_TYPE = "TriggerType";
+    public static final String KEY_IS_POST_ONLY = "IsPostOnly";
+    public static final String KEY_IS_REDUCE_ONLY = "IsReduceOnly";
+    public static final String KEY_ORIGINATOR = "Originator";
+
+    public CreateOrderBuilder() {
+        value.put(KEY_ORDER_TYPE, OrderType.LIMIT.value);
+        value.put(KEY_ORDER_TIME_IN_FORCE, OrderTimeInForce.GTC.value);
+        value.put(KEY_IS_POST_ONLY, "false");
+        value.put(KEY_IS_REDUCE_ONLY, "false");
+    }
     public CreateOrderBuilder withMarket(final String market){
-        this.market = market;
+        value.put(KEY_MARKET, market);
         return this;
     }
 
     public CreateOrderBuilder withSide(final Side side){
-        this.side = side.value;
+        value.put(KEY_SIDE, side.value);
         return this;
     }
 
     public CreateOrderBuilder withQuantity(final BigDecimal quantity){
-        this.quantity = quantity.toPlainString();
+        value.put(KEY_QUANTITY, quantity.toPlainString());
         return this;
     }
 
-    public CreateOrderBuilder withType(final OrderType type){
-        this.type = type.value;
+    public CreateOrderBuilder withOrderType(final OrderType orderType){
+        value.put(KEY_ORDER_TYPE, orderType.value);
         return this;
     }
 
     public CreateOrderBuilder withPrice(final double price){
-        this.price = String.valueOf(price);
+        value.put(KEY_PRICE, String.valueOf(price));
         return this;
     }
 
     public CreateOrderBuilder withStopPrice(final double stopPrice){
-        this.stopPrice = String.valueOf(stopPrice);
+        value.put(KEY_STOP_PRICE, String.valueOf(stopPrice));
         return this;
     }
 
     public CreateOrderBuilder withOrderTimeInForce(final OrderTimeInForce timeInForce){
-        this.timeInForce = timeInForce.value;
+        value.put(KEY_ORDER_TIME_IN_FORCE, timeInForce.value);
         return this;
     }
 
     public CreateOrderBuilder withTriggerType(final String triggerType){
-        this.triggerType = triggerType;
+        value.put(KEY_TRIGGER_TYPE, triggerType);
         return this;
     }
 
     public CreateOrderBuilder withIsPostOnly(final boolean isPostOnly){
-        this.isPostOnly = isPostOnly;
+        value.put(KEY_IS_POST_ONLY, String.valueOf(isPostOnly));
         return this;
     }
 
     public CreateOrderBuilder withIsReduceOnly(final boolean isReduceOnly){
-        this.isReduceOnly = isReduceOnly;
+        value.put(KEY_IS_REDUCE_ONLY, String.valueOf(isReduceOnly));
         return this;
     }
 
     public CreateOrderBuilder withOriginator(final String originator){
-        this.originator = originator;
+        value.put(KEY_ORIGINATOR, originator);
         return this;
     }
 
-    public CreateOrder build() {
-        return new CreateOrder(this);
+    public TradehubMessage build() {
+        return new TradehubMessage(this);
+    }
+
+    @Override
+    public void verify(){
+        try {
+            requireNonNull(value.get(KEY_MARKET), "Market field must be non null");
+            requireNonNull(value.get(KEY_SIDE), "Side field must be non null");
+            requireNonNull(value.get(KEY_QUANTITY), "Quantity field must be non null");
+            requireNonNull(value.get(KEY_ORDER_TYPE), "OrderType field must be non null");
+            requireNonNull(value.get(KEY_ORIGINATOR), "Originator field must be not null");
+            if (value.get(KEY_ORDER_TYPE).equals(OrderType.LIMIT.value) || value.get(KEY_ORDER_TYPE).equals(OrderType.STOP_LIMIT.value)) {
+                requireNonNull(value.get(KEY_PRICE), "The price field must be non null on limit orders");
+            }
+            if (value.get(KEY_ORDER_TYPE).equals(OrderType.STOP_LIMIT.value)) {
+                requireNonNull(value.get(KEY_STOP_PRICE), "The stop price must be non null on stop-limit orders");
+            }
+            if (value.get(KEY_ORDER_TYPE).equals(OrderType.STOP_MARKET.value) || value.get(KEY_ORDER_TYPE).equals(OrderType.STOP_LIMIT.value)) {
+                requireNonNull(value.get(KEY_TRIGGER_TYPE), "The trigger type field must be non null on stop-limit/stop-market orders");
+            }
+        } catch (Exception e){
+            throw new TradehubSdkTechnicalException("CreateOrder payload is not valid", e);
+        }
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
+    }
+
+    @Override
+    public Map<String, String> getValue() {
+        return this.value;
     }
 }

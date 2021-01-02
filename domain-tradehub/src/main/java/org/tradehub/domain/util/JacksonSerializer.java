@@ -1,7 +1,9 @@
 package org.tradehub.domain.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class JacksonSerializer {
 
@@ -9,10 +11,8 @@ public class JacksonSerializer {
 
     public JacksonSerializer() {
         this.mapper = new ObjectMapper();
-    }
-
-    public JacksonSerializer(ObjectMapper mapper) {
-        this.mapper = mapper;
+        this.mapper.configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
+        this.mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
     }
 
     public <T> T getObjectFromString(Class<T> objClass, String jsonString) throws JsonProcessingException {

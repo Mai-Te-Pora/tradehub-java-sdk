@@ -8,8 +8,7 @@ import org.tradehub.domain.util.JacksonSerializer;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestWithResources
 class TokenTest {
@@ -32,8 +31,8 @@ class TokenTest {
         assertEquals("neo", result.getBlockchain());
         assertEquals(4, result.getChainId());
         assertEquals("27ed90527afd253ab30a4f207a0882c8567a93c9", result.getAssetId());
-        assertEquals(true, result.getIsActive());
-        assertEquals(false, result.getIsCollateral());
+        assertTrue(result.getIsActive());
+        assertFalse(result.getIsCollateral());
         assertEquals("", result.getLockproxyHash());
         assertEquals(BigDecimal.valueOf(100000000000000000L), result.getDelegatedSupply());
         assertEquals("tswth1mw90en8tcqnvdjhp64qmyhuq4qasvhy2s6st4t", result.getOriginator());

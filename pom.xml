@@ -11,6 +11,7 @@
     <modules>
         <module>domain-tradehub</module>
         <module>adapter-crypto-tradehub</module>
+        <module>adapter-lowlatency-tradehub</module>
     </modules>
 
     <repositories>
