@@ -7,4 +7,5 @@ public interface TradehubMessageBuilder {
     String getType();
     Map<String, String> getValue();
     void verify();
+    TradehubMessage build();
 }

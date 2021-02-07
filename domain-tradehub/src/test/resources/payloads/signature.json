@@ -1,0 +1,29 @@
+{
+  "accountNumber": "5",
+  "chainId": "3",
+  "fee": {
+    "amount": [
+      {
+        "swth": "100000000"
+      }
+    ],
+    "gas": "100000000000"
+  },
+  "msgs": [
+    {
+      "type": "order/MsgCreateOrder",
+      "value": {
+        "IsPostOnly": "false",
+        "IsReduceOnly": "false",
+        "Market": "swth_eth",
+        "OrderTimeInForce": "gtc",
+        "OrderType": "limit",
+        "Originator": "swth1z2jz4uhz8zgt4lq9mq5slz3ukyp3grhl7nsr4x",
+        "Price": "1.01",
+        "Quantity": "200",
+        "Side": "sell"
+      }
+    }
+  ],
+  "sequence": "1"
+}

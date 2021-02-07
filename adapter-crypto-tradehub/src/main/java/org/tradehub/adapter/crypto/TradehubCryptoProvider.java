@@ -32,6 +32,7 @@ import java.security.interfaces.ECPrivateKey;
 import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECPrivateKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
@@ -211,6 +212,12 @@ public class TradehubCryptoProvider implements TradehubCrypto {
             sb.append(String.format("%8s", Integer.toBinaryString(b1 & 0xFF)).replace(' ', '0'));
         }
         return sb.toString();
+    }
+
+    @Override
+    public Optional<String> getBase64SignatureFromBytes(final ECPrivateKey privateKey, final byte[] bytes) {
+        return getSignature(privateKey, bytes)
+                .map(signature -> Base64.getEncoder().encodeToString(signature));
     }
 
     private X509Certificate generateCertificate(final KeyPair keyPair) throws Exception {

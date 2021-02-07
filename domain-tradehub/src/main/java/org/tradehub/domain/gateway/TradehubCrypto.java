@@ -35,4 +35,6 @@ public interface TradehubCrypto {
     byte[] getBech32AddressFromBytes(String binaryString, byte[] result, int pos);
 
     String getBinaryStringFromBytes(byte[] bytes);
+
+    Optional<String> getBase64SignatureFromBytes(ECPrivateKey privateKey, byte [] bytes);
 }

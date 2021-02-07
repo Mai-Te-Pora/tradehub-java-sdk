@@ -88,6 +88,7 @@ public class CreateOrderBuilder implements TradehubMessageBuilder {
         return this;
     }
 
+    @Override
     public TradehubMessage build() {
         return new TradehubMessage(this);
     }
